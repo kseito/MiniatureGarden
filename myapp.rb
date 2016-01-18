@@ -1,13 +1,17 @@
 require 'sinatra'
-require 'rss'
+require 'sinatra/base'
 
-get '/' do
-	@title = 'トップ'
-	erb :index
-end
+class MyApp < Sinatra::Base
 
-get '/news' do
+    get '/' do
+        @title = 'トップ'
+        erb :index
+    end
 
-    @rss = RSS::Parser.parse("http://rss.sapporobeer.jp/rss/sapporo_1.xml")
-    erb :news
+    get '/news' do
+
+        @rss = RSS::Parser.parse("http://rss.sapporobeer.jp/rss/sapporo_1.xml")
+        erb :news
+    end
+
 end
